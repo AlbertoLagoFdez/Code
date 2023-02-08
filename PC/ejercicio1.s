@@ -8,7 +8,6 @@ main:
     j siguiente
 opcion1:
     move $t3,$t2
-     $t3,$t2
 siguiente:
     bgt $t1,$t2,opcion2
     move $t4,$t2
