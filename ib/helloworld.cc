@@ -1,12 +1,22 @@
+/**
+ * @AlbertoLagoFdez
+ * @brief programa que pruba letras aleatorias hasta imprimir helloworld
+*/
+
+
 #include <iostream>
-#include <vector>
-#include <string>
+#include <random>
+#include <ctime>
 
 int main() {
-    std::vector<std::string> cadena{"Hola", "Mundo", ",", "code", "on", "C++"};
-    for(int i{0} ; i < cadena.size() ; i++) {
-        std::cout << cadena[i];
+    std::srand(std::time(nullptr));
+    char randomletter = std::rand();
+    std::string cadenafinal{"hello world"}, cadena;
+    for(int i{0}; i < cadenafinal.size(); i++) {
+        cadena[i] += std::rand();
+        while(cadena[i] != cadenafinal[i]){
+            cadena[i] += std::rand();
+            std::cout << cadena[i];
+        }
     }
-    std::cout << std::endl;
-    return 0;
 }
