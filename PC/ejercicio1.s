@@ -15,6 +15,6 @@ siguiente:
 opcion2:
     move $t4,$t1
 siguiente2:
-    move $t5,$t3,$t4
+    add $t5,$t3,$t4
     li $v0,10
     syscall
