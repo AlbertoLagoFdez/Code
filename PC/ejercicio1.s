@@ -3,4 +3,4 @@
 main:
     li $t1,3
     li $t2,1
-    
+    bgt 
