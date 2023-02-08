@@ -11,6 +11,6 @@ bucle:
     addi $t1,1
     j bucle
 fuera:
-    lli $v0,10
+    li $v0,10
     syscall
     
