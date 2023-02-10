@@ -3,19 +3,19 @@
 
 main:
     li $t1,10
-    li $t2,0
+    li $t2,2
+    li $v1,1
     li $t3,0
-    li $s0,1
-    bgt $zero,$t1,final
-    bgt $zero,$t2,final
-bucle:
-    blez $s0,$t1,final
-    add $s0,$s0,1
-    div $t4,$s0,$t2
-    beqz $t4,nocuenta
+    blez $t1,out
+    blez $t2,out
+while:
+    ble $t1,$v1,out
+    addi $v1,1
+    div $t4,$v1,$t2
+    bnez $t4,outif
     addi $t3,1
-nocuenta:
-    j bucle
-final:
+outif:
+    j while
+out:
     li $v0,10
     syscall
