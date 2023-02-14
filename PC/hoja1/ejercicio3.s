@@ -5,8 +5,8 @@ main:
     li $t2,2
     li $t3,1
 
-    subi $t2,$t3
-    beq $t0,$t2,$t1
+    sub $v1,$t2,$t3
+    beq $t0,$v1,$t1
     slt $t4,$t1,$t3
     sge $t6,$t2,$t3
     and $t7,$t4,$t6
