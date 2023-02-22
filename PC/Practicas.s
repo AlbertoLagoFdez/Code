@@ -9,6 +9,7 @@ bucle:
     bgt $t1,$t2,fuera
     add $s0,$s0,$t1
     addi $t1,1
+tupadre:
     j bucle
 fuera:
     li $v0,10

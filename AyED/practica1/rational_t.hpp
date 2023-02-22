@@ -25,7 +25,9 @@ class rational_t
 {
   // pautas de estilos [44] y [73]: primero "public" y después "private"
 public:
+  // constructor
   rational_t(const int = 0, const int = 1);
+  // destructor
   ~rational_t() {}
   
   // pauta de estilo [71]: indentación a 2 espacios

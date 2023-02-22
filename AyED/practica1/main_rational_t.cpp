@@ -56,6 +56,6 @@ int main()
   
   cout << "a / b: ";
   a.divide(b).write();
-  
+
   return 0;
 }
