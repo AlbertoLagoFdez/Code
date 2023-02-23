@@ -12,6 +12,7 @@
 
 #include "rational_t.hpp"
 
+// constructor por defecto 
 rational_t::rational_t(const int n, const int d)
 {
   assert(d != 0);
@@ -21,6 +22,7 @@ rational_t::rational_t(const int n, const int d)
 // pauta de estilo [87]: 3 líneas de separación entre métodos
 
 // pauta de estilo [83]: tipo retornado en línea anterior al método
+// getter para adquirir el num_
 int
 rational_t::get_num() const
 {
@@ -28,7 +30,7 @@ rational_t::get_num() const
 }
 
 
-
+// getter para adquirir el den_
 int
 rational_t::get_den() const
 {
@@ -36,7 +38,7 @@ rational_t::get_den() const
 }
 
 
-  
+// setter para darle valor al num_
 void
 rational_t::set_num(const int n)
 {
@@ -44,7 +46,7 @@ rational_t::set_num(const int n)
 }
 
 
-  
+// seeter para darle varlo al den_  
 void
 rational_t::set_den(const int d)
 {
@@ -53,7 +55,7 @@ rational_t::set_den(const int d)
 }
 
 
-
+// metodo para mostrar el valor de un racional que devuelve un double
 double
 rational_t::value() const
 { 
@@ -62,6 +64,7 @@ rational_t::value() const
 
 
 // comparaciones
+// metodo que compara si un racional es igual a otro que devuelve un booleano
 bool
 rational_t::is_equal(const rational_t& r, const double precision) const
 {
@@ -69,7 +72,7 @@ rational_t::is_equal(const rational_t& r, const double precision) const
 }
 
 
-
+// metodo que compara si un racional es mayor a otro que devuelve un booleano
 bool
 rational_t::is_greater(const rational_t& r, const double precision) const
 {
@@ -77,7 +80,7 @@ rational_t::is_greater(const rational_t& r, const double precision) const
 }
 
 
-
+// metodo que compara si un racional es menor a otro que devuelve un booleano
 bool
 rational_t::is_less(const rational_t& r, const double precision) const
 {
@@ -86,6 +89,7 @@ rational_t::is_less(const rational_t& r, const double precision) const
 
 
 // operaciones
+// metodo para sumar dos racionales que duelve un racional
 rational_t
 rational_t::add(const rational_t& r)
 {
@@ -93,7 +97,7 @@ rational_t::add(const rational_t& r)
 }
 
 
-
+// metodo para restar dos racionales que duelve un racional
 rational_t
 rational_t::substract(const rational_t& r)
 {
@@ -101,7 +105,7 @@ rational_t::substract(const rational_t& r)
 }
 
 
-
+// metodo para multiplicar dos racionales que duelve un racional
 rational_t
 rational_t::multiply(const rational_t& r)
 {
@@ -109,7 +113,7 @@ rational_t::multiply(const rational_t& r)
 }
 
 
-
+// metodo para dividir dos racionales que duelve un racional
 rational_t
 rational_t::divide(const rational_t& r)
 {
@@ -119,6 +123,7 @@ rational_t::divide(const rational_t& r)
 
 
 // E/S
+// metodo para imprimir un racional por pantalla
 void
 rational_t::write(ostream& os) const
 {
@@ -126,7 +131,7 @@ rational_t::write(ostream& os) const
 }
 
 
-
+// metodo para leer un racional por pantalla
 void 
 rational_t::read(istream& is)
 {
