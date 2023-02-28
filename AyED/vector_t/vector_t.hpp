@@ -28,11 +28,11 @@ class vector_t
       ostream write(ostream& os)
       {
         os << n_ << endl;
-        for();
+        for(int = 0; i < n_; i++);
         os << endl;
         return os;
       }  
-      
+
       istream read(istream& is) 
       {
         is >> n_;

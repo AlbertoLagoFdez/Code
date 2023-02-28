@@ -120,7 +120,17 @@ rational_t::divide(const rational_t& r)
   return rational_t{num_*r.den_,den_*r.num_};
 }
 
-
+void rational_t::natural()
+{
+  if(num_ % den_ == 0)
+  {
+    cout << "Es entero." << endl;
+  }
+  else
+  {
+    cout << "No es entero." << endl;
+  }
+}
 
 // E/S
 // metodo para imprimir un racional por pantalla
@@ -141,3 +151,4 @@ rational_t::read(istream& is)
   is >> den_;
   assert(den_ != 0);
 }
+

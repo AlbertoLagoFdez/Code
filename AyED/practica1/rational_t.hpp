@@ -58,11 +58,14 @@ public:
   rational_t multiply(const rational_t&);
   // metodo para dividir 2 racionales
   rational_t divide(const rational_t&);
-  
+  // metodo para ver si un racional es natural
+  void natural();
   //metodo para escribir por pantalla el racional
   void write(ostream& = cout) const;
   //metodo para leer un racional
   void read(istream& = cin);
+
+  //rational_t& operator+(const rational_t& a, const rational_t& b); 
   
 private:
   // pauta de estilo [11]: nombre de los atributos seguido de "_"

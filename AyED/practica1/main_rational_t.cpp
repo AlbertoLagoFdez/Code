@@ -37,12 +37,12 @@ int main()
   c.write();
 
   // FASE II
-  rational_t x(1, 3), y(2, 3);
+  rational_t x(2, 12), y(3, 8);
   x.write();
   y.write();
   cout << "x == y? " << (x.is_equal(y) ? "true" : "false") << endl;
-  cout << "x < y? " << (x.is_greater(y) ? "true" : "false") << endl;
-  cout << "x > y? " << (x.is_less(y) ? "true" : "false") << endl;
+  cout << "x > y? " << (x.is_greater(y) ? "true" : "false") << endl;
+  cout << "x < y? " << (x.is_less(y) ? "true" : "false") << endl;
 
   // FASE III
   cout << "a + b: ";
@@ -56,6 +56,8 @@ int main()
   
   cout << "a / b: ";
   a.divide(b).write();
+
+  c.natural();
 
   return 0;
 }
