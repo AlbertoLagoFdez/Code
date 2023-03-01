@@ -62,3 +62,34 @@ double vector_t::operator[] (const int i)
 {
     return at(i);
 }
+
+ostream& vector_t::write(ostream& os) const
+{
+    os << get_size() << endl;
+    for(int i = 0; i < get_size(); i++)
+    {
+        os << at(i) << " ";
+    } 
+    os << endl;
+    return os;
+}
+
+istream& vector_t::read(istream& is)
+{
+    is >> n_;
+    for(int i = 0; i < n_; i++)
+    {
+        is >> at(i);
+    }
+    return is;
+}
+
+ostream& operator<<(ostream& os, const vector_t& v)
+{
+    return v.write(os);
+}
+
+istream& operator>>(istream& is, const vector_t& v)
+{
+    return v.read(is);
+}

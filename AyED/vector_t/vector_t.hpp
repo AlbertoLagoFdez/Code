@@ -20,8 +20,9 @@ class vector_t
       double operator[] (const int i ) const;
       double operator[] (const int i );
 
-      ostream& write (ostream& = cout); 
+      ostream& write (ostream& = cout) const; 
       istream& read (istream& = cin);
+
     private:
       double *base_;
       int n_;
