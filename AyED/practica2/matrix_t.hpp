@@ -183,14 +183,19 @@ template<class T>
 void
 matrix_t<T>::multiply(const matrix_t<T>& A, const matrix_t<T>& B)
 {
-  assert(A.n_ == B.m_);
-  matrix_t<T> C(A.m_, B.n_);
-  for(int i = 0; i < A.m_;i++)
+  assert(A.get_m() == B.get_n());
+  resize(A.get_m(), B.get_n());
+  
+  for(int i = 1;i < A.get_m(); ++i)
   {
-    for(int j = 0; j < B.m_; j++)
+    for (int j = 1; i < B.get_n(); ++j)
     {
-      C[i][j] = 
+      T sum = 0;
+      for (int k = 1; k <= A.get_n(); ++k)
+      {
+        sum = sum + (A(i,k)*B(k,j));
+      }
+      at(i,j) = sum;
     }
   }
-  return C;
 }
