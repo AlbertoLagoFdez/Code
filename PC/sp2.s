@@ -84,9 +84,9 @@ for:
         la $a0,funcion1
         syscall
 #cambiar de float a entero
-#print float x     
-        li $v0,2
-        mov.s $f12,$f6
+#print int x     
+        li $v0,1
+        move $a0,$s2
         syscall
 #print string ") = "
         li $v0,4
