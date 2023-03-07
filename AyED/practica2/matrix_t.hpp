@@ -183,5 +183,14 @@ template<class T>
 void
 matrix_t<T>::multiply(const matrix_t<T>& A, const matrix_t<T>& B)
 {
-  // rellenar código
+  assert(A.n_ == B.m_);
+  matrix_t<T> C(A.m_, B.n_);
+  for(int i = 0; i < A.m_;i++)
+  {
+    for(int j = 0; j < B.m_; j++)
+    {
+      C[i][j] = 
+    }
+  }
+  return C;
 }

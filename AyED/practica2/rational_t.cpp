@@ -142,7 +142,7 @@ rational_t::divide(const rational_t& r) const
 rational_t
 operator+(const rational_t& a, const rational_t& b)
 {
-  // rellenar código
+  return rational_t{a.add(b)};
 }
 
 
@@ -150,7 +150,7 @@ operator+(const rational_t& a, const rational_t& b)
 rational_t
 operator-(const rational_t& a, const rational_t& b)
 {
-  // rellenar código
+  return rational_t{a.substract(b)};
 }
 
 
@@ -158,7 +158,7 @@ operator-(const rational_t& a, const rational_t& b)
 rational_t
 operator*(const rational_t& a, const rational_t& b)
 {
-  // rellenar código
+  return rational_t{a.multiply(b)};
 }
 
 
@@ -166,7 +166,7 @@ operator*(const rational_t& a, const rational_t& b)
 rational_t
 operator/(const rational_t& a, const rational_t& b)
 {
-  // rellenar código
+  return rational_t{a.divide(b)};
 }
 
 
