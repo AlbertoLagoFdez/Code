@@ -41,6 +41,8 @@ public: //Atributos y métodos públicos
   const T& operator()(const int, const int) const;
 
   vector_t<T> SumaFilasPares() const;
+
+  matrix_t<T> traspuesta();
   
   // operaciones y operadores
   void multiply(const matrix_t<T>&, const matrix_t<T>&);
@@ -182,10 +184,8 @@ template<class T> void matrix_t<T>::multiply(const matrix_t<T>& A, const matrix_
 }
 
 //Sumar filas pares
-
 template<class T>
-vector_t<T>
-matrix_t<T>::SumaFilasPares() const{
+vector_t<T> matrix_t<T>::SumaFilasPares() const{
   vector_t<T> vector_resultado;
   vector_resultado.resize(get_m() / 2);
   for(int i = 1; i<= get_m(); ++i)
@@ -203,3 +203,19 @@ matrix_t<T>::SumaFilasPares() const{
   return vector_resultado;
 }
 
+/*
+//traspuesta
+template <class T>
+matrix_t<T> matrix_t<T>::traspuesta()
+{
+  matrix_t<T> matriz_resultado;
+  for(int i = 0; i < m_; ++i)
+  {
+    for(int j = 0; j < n_; ++j)
+    {
+      at(i)(j) = at(j)(i);
+    }
+  } 
+  return matriz_resultado;
+}
+*/
