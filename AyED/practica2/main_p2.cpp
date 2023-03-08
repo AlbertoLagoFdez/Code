@@ -64,6 +64,8 @@ int main()
   C.multiply(A, B);
   cout << "Multiplicación de matrices A y B: " << endl;
   C.write();
+
+  B.SumaFilasPares().write();
   
   return 0;
 }

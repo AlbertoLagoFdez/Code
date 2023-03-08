@@ -182,7 +182,7 @@ template<class T> void matrix_t<T>::multiply(const matrix_t<T>& A, const matrix_
 }
 
 //Sumar filas pares
-/*
+
 template<class T>
 vector_t<T>
 matrix_t<T>::SumaFilasPares() const{
@@ -200,10 +200,6 @@ matrix_t<T>::SumaFilasPares() const{
       k++;
     }
   }
-  for (int h = 0; h < vector_resultado.get_size(); h++)
-  {
-    cout << vector_resultado.at(h) << " ";
-  }
   return vector_resultado;
 }
-*/
+
