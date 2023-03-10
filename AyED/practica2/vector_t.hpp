@@ -154,6 +154,7 @@ vector_t<T>::at(const int i)
 
 
 //getter-setter
+//La sobrecarga del operador [] sirve para acceder a los elementos de la clase utilizando los corchetes.
 template<class T>
 T&
 vector_t<T>::operator[](const int i)

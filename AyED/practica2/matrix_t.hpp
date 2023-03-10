@@ -40,6 +40,8 @@ public: //Atributos y métodos públicos
   const T& at(const int, const int) const;
   const T& operator()(const int, const int) const;
 
+  vector_t<T> SumaMatrizSec();
+
   vector_t<T> SumaFilasPares() const;
 
   matrix_t<T> traspuesta();
@@ -107,6 +109,7 @@ template<class T> T& matrix_t<T>::at(const int i, const int j)
 
 
 //Sobrecarga del operador()
+//La sobrecarga de operador () sirve para acceder a los elementos de la clase utilizando los parentesis.
 template<class T> T& matrix_t<T>::operator()(const int i, const int j)
 {
   return at(i, j);
@@ -183,6 +186,25 @@ template<class T> void matrix_t<T>::multiply(const matrix_t<T>& A, const matrix_
   }
 }
 
+template <class T>
+vector_t<T> matrix_t<T>::SumaMatrizSec()
+{
+vector_t<T> resultado;
+resultado.resize(1);
+int k = 0;
+  for(int i = m_  ; i > 0 ; --i)
+  {
+    for (int j  = 1 ; j <= m_; ++j )
+    {
+      if ( j != i)
+      {
+      resultado.at(k) = resultado.at(k) + at(i, j); 
+      }
+    }
+  }
+  return resultado;
+}
+
 //Sumar filas pares
 template<class T>
 vector_t<T> matrix_t<T>::SumaFilasPares() const{
@@ -208,14 +230,15 @@ vector_t<T> matrix_t<T>::SumaFilasPares() const{
 template <class T>
 matrix_t<T> matrix_t<T>::traspuesta()
 {
-  matrix_t<T> matriz_resultado;
-  for(int i = 0; i < m_; ++i)
+  matrix_t<T> C;
+  C.resize(get_n(),get_m());
+  for(int i = 1; i < get_m(); ++i)
   {
-    for(int j = 0; j < n_; ++j)
+    for(int j = 1; j < get_n(); ++j)
     {
-      at(i)(j) = at(j)(i);
+      C.at(i,j) = at(j, i);
     }
   } 
-  return matriz_resultado;
+  return C;
 }
 */

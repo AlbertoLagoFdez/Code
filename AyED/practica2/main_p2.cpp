@@ -65,7 +65,9 @@ int main()
   cout << "Multiplicación de matrices A y B: " << endl;
   C.write();
 
-  B.traspuesta();
+  C.SumaMatrizSec().write();
+
+//  B.traspuesta().write();
   
   return 0;
 }
