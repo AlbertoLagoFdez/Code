@@ -1,6 +1,6 @@
-// AUTOR: 
-// FECHA: 
-// EMAIL: 
+// AUTOR: Alberto Lago Fernandez
+// FECHA: 13/03/2023
+// EMAIL: alu0101562247@ull.edu.es
 // VERSION: 3.1
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 3
