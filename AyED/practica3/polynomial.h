@@ -82,7 +82,13 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
 // Evaluación de un polinomio representado por vector denso
 double Polynomial::Eval(const double x) const {
   double result{0.0};
-  // poner el código aquí
+  for(int i = 0; i < get_size(); ++i)
+  {
+    if(at(i) != 0)
+    {
+      result += at(i) * pow(x, i);
+    }
+  }
   return result;
 }
 
@@ -123,7 +129,11 @@ std::ostream& operator<<(std::ostream& os, const SparsePolynomial& p) {
 // Evaluación de un polinomio representado por vector disperso
 double SparsePolynomial::Eval(const double x) const {
   double result{0.0};
-  // poner el código aquí
+  for(int i = 0; i < get_nz(); ++i)
+  {
+    int inx = at(i).get_inx();
+    result += at(i).get_val() * pow(x, inx);
+  }
   return result;
 }
 
