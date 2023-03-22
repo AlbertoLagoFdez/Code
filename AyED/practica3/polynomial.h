@@ -95,7 +95,26 @@ double Polynomial::Eval(const double x) const {
 // Comparación si son iguales dos polinomios representados por vectores densos
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+    if (get_size() < pol.get_size())
+    {
+      for(int i = 0; i < get_size() - 1 ; i++)
+      {
+        if(fabs(pol[i] - at(i)) > eps)
+        {
+          differents = true;
+        }
+      }
+    }
+    else 
+    {
+      for(int i = 0; i < pol.get_size() - 1 ; i++)
+      {
+        if(fabs(pol[i] - at(i)) > eps)
+        {
+          differents = true;
+        }
+      }
+    }
   return !differents;
 }
 
@@ -138,10 +157,28 @@ double SparsePolynomial::Eval(const double x) const {
 }
 
 // Comparación si son iguales dos polinomios representados por vectores dispersos
-bool SparsePolynomial::IsEqual(const SparsePolynomial& spol
-			       , const double eps) const {
+bool SparsePolynomial::IsEqual(const SparsePolynomial& spol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+    if(get_n() < spol.get_n())
+    {
+      for(int i = 0; i < get_nz() - 1; i++)
+      {
+        if(fabs(at(i).get_val() - spol[i].get_val() > eps))
+        {
+          differents = true;
+        }
+      }
+    } 
+    else
+    {
+      for(int i = 0; i < spol.get_nz() - 1; i++)
+      {
+        if(fabs(at(i).get_val() - spol[i].get_val() > eps))
+        {
+          differents = true;
+        }
+      }
+    }
   return !differents;
 }
 
@@ -149,7 +186,32 @@ bool SparsePolynomial::IsEqual(const SparsePolynomial& spol
 // vector disperso y vector denso
 bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+    if (get_n() < pol.get_size())
+    {
+    for(int i = 0, j = 0; i < pol.get_size() && j < get_nz(); i++)
+    {
+      if (pol[i] != 0.0) 
+      {
+        if(fabs(pol[i] - at(j).get_val()) > eps)
+        {
+        differents = true;
+        }
+        ++j;
+      }
+    }
+  } 
+  else 
+  {
+    for(int i = 0, j = 0; i < pol.get_size() && j < get_nz(); i++)
+    {
+      if (pol[i] != 0.0) {
+        if(fabs(pol[i] - at(j).get_val()) > eps){
+        differents = true;
+       }
+       ++j;
+      }
+    }
+  }
   return !differents;
 }
 
