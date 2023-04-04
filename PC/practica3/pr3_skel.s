@@ -54,6 +54,7 @@ msg_fin:    .asciiz "\nFin del programa.\n"
     .text
 main:
 
+
             #std::cout << "\nPráctica PR3 de Principios de Computadores. Matrices.\n";
             la $a0,titulo
             li $v0,4
@@ -66,22 +67,40 @@ main:
             la $a0,msg_matriz
             li $v0,4
             syscall
-            
-            la $a0,nfil    #como se imprime esto?¿?¿?¿?¿¿?¿¿??¿¿???¿¿?
-            li $v0,4
+
+            lw $a0,nfil
+            li $v0,1
             syscall
 
             la $a0,msg_x
             li $v0,4
             syscall
 
-            la $a0,separador
-            li $v0,4
+            lw $a0,ncol
+            li $v0,1
             syscall
 
-            la $a0,ncol    #como se imprime esta mierda??¿?¿??¿¿?¿??¿¿¿
+            #for ( int f = 0; f < nfil; f++) {
+            #for (int c = 0; c < ncol; c++ ) {
+            #    std::cout << mat[f*ncol+c] << "  "; // equivalente a acceso `mat[f][c]`
+            #    }
+            #std::cout << "\n";
+            #}
+            lw $s2,mat      #mat -> $s2
+            li $t0,0        #f = 0 -> $t0
+            lw $s0,nfil     #nfil -> $s0
 
+for1:       bge $t0,$s0,outfor1
+            
+            li $t1,0        #c = 0 -> $t1
+            lw $s1,ncol     #ncol -> $s1
 
+for2:       bge $t1,$s1,outfor2
+
+            mul $t2,$t0,$s1
+            add  $t2,$t2,$t1
+            mul $t2,$t2,4
+            lw $a0,$t2($s2)
 
             #fin del programa
             li $v0,10
