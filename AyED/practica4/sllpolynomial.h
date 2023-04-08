@@ -66,7 +66,7 @@ SllPolynomial::SllPolynomial(const vector_t<double>& v, const double eps) {
 
 // E/S
 void SllPolynomial::Write(std::ostream& os) const {
-/*  os << "[ ";
+  os << "[ ";
   bool first{true};
   SllPolyNode* aux{get_head()};
   while (aux != NULL) {
@@ -83,7 +83,7 @@ void SllPolynomial::Write(std::ostream& os) const {
     aux = aux->get_next();
   }
   os << " ]" << std::endl;
-  */
+  
 }
 
 std::ostream& operator<<(std::ostream& os, const SllPolynomial& p) {
@@ -102,8 +102,11 @@ double SllPolynomial::Eval(const double x) const {
   while(aux != NULL) 
   {
     int grado = aux->get_data().get_inx();
+    double coeficiente = aux -> get_data().get_val();
+    double termino = pow(x, grado);
+    result += termino * coeficiente;
+    aux = aux->get_next();
   }
-  
   return result;
 }
 
@@ -111,8 +114,42 @@ double SllPolynomial::Eval(const double x) const {
 bool SllPolynomial::IsEqual(const SllPolynomial& sllpol,
 			    const double eps) const {
   bool differents = false;
-  // poner el código aquí
-
+    SllPolyNode* aux1 = get_head();
+    SllPolyNode* aux2 = sllpol.get_head();
+    while(aux1 != NULL || aux2 != NULL)
+    {
+      if(fabs( aux1 - aux2  > eps))
+      {
+        differents = true;
+        aux1 = aux1->get_next();
+        aux2 = aux2->get_next();
+      }
+      else
+      {
+        aux1 = aux1->get_next();
+        aux2 = aux2->get_next();
+      }
+    }
+    if(aux1 != NULL)
+    {
+      while(aux1 != NULL)
+      {
+        if(aux1 != 0)
+        {
+          differents = true;
+        }
+      }
+    }
+    else
+    {
+      while(aux2 != NULL)
+      {
+        if(aux2 != 0)
+        {
+          differents = true;
+        }
+      }
+    }
   return !differents;
 }
 
@@ -121,8 +158,10 @@ bool SllPolynomial::IsEqual(const SllPolynomial& sllpol,
 void SllPolynomial::Sum(const SllPolynomial& sllpol,
 			SllPolynomial& sllpolsum,
 			const double eps) {
-  // poner el código aquí
+  SllPolyNode* aux1 = get_head();
+  SllPolyNode* aux2 = sllpol.get_head();
 
+  
 }
 
 
