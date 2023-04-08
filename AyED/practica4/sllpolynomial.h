@@ -50,7 +50,18 @@ bool IsNotZero(const double val, const double eps = EPS) {
 // FASE II
 // constructor
 SllPolynomial::SllPolynomial(const vector_t<double>& v, const double eps) {
-   
+  push_front(new SllPolyNode());
+  SllPolyNode* aux = get_head();
+  for(int i = 0; i < v.get_size(); i++)
+  {
+    if(fabs(v[i]) > eps)
+    {
+      aux->set_data(pair_double_t(v[i],i));
+      insert_after(aux, new SllPolyNode());
+      aux = aux -> get_next();
+    }
+  }
+  aux->set_next(NULL);
 }
 
 // E/S
