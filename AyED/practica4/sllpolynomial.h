@@ -55,7 +55,7 @@ SllPolynomial::SllPolynomial(const vector_t<double>& v, const double eps) {
 
 // E/S
 void SllPolynomial::Write(std::ostream& os) const {
-  os << "[ ";
+/*  os << "[ ";
   bool first{true};
   SllPolyNode* aux{get_head()};
   while (aux != NULL) {
@@ -72,6 +72,7 @@ void SllPolynomial::Write(std::ostream& os) const {
     aux = aux->get_next();
   }
   os << " ]" << std::endl;
+  */
 }
 
 std::ostream& operator<<(std::ostream& os, const SllPolynomial& p) {
