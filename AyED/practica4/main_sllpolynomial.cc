@@ -45,24 +45,15 @@ int main()
   cout << "sllp3(" << x3 << ")= " << sllp3.Eval(x3) << endl;
   cout << endl;
 
-  cout << "sllp1 == sllp1? " << (sllp1.IsEqual(sllp1) ? "true" : "false")
-       << endl;
-  cout << "sllp2 == sllp2? " << (sllp2.IsEqual(sllp2) ? "true" : "false")
-       << endl;
-  cout << "sllp3 == sllp3? " << (sllp3.IsEqual(sllp3) ? "true" : "false")
-       << endl;
-  cout << "sllp1 == sllp2? " << (sllp1.IsEqual(sllp2) ? "true" : "false")
-       << endl;
-  cout << "sllp2 == sllp1? " << (sllp2.IsEqual(sllp1) ? "true" : "false")
-       << endl;
-  cout << "sllp1 == sllp3? " << (sllp1.IsEqual(sllp3) ? "true" : "false")
-       << endl;
-  cout << "sllp3 == sllp1? " << (sllp3.IsEqual(sllp1) ? "true" : "false")
-       << endl;
-  cout << "sllp2 == sllp3? " << (sllp2.IsEqual(sllp3) ? "true" : "false")
-       << endl;
-  cout << "sllp3 == sllp2? " << (sllp3.IsEqual(sllp2) ? "true" : "false")
-       << endl;
+  cout << "sllp1 == sllp1? " << (sllp1.IsEqual(sllp1) ? "true" : "false") << endl;
+  cout << "sllp2 == sllp2? " << (sllp2.IsEqual(sllp2) ? "true" : "false") << endl;
+  cout << "sllp3 == sllp3? " << (sllp3.IsEqual(sllp3) ? "true" : "false") << endl;
+  cout << "sllp1 == sllp2? " << (sllp1.IsEqual(sllp2) ? "true" : "false") << endl;
+  cout << "sllp2 == sllp1? " << (sllp2.IsEqual(sllp1) ? "true" : "false") << endl;
+  cout << "sllp1 == sllp3? " << (sllp1.IsEqual(sllp3) ? "true" : "false") << endl;
+  cout << "sllp3 == sllp1? " << (sllp3.IsEqual(sllp1) ? "true" : "false") << endl;
+  cout << "sllp2 == sllp3? " << (sllp2.IsEqual(sllp3) ? "true" : "false") << endl;
+  cout << "sllp3 == sllp2? " << (sllp3.IsEqual(sllp2) ? "true" : "false") << endl;
   cout << endl;
 
   // Fase IV

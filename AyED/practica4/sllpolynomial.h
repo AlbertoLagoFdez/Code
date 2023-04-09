@@ -116,7 +116,7 @@ bool SllPolynomial::IsEqual(const SllPolynomial& sllpol,
   bool differents = false;
     SllPolyNode* aux1 = get_head();
     SllPolyNode* aux2 = sllpol.get_head();
-    while(aux1 != NULL || aux2 != NULL)
+    while(aux1 != NULL && aux2 != NULL)
     {
       if(fabs( aux1 - aux2  > eps))
       {
@@ -160,8 +160,6 @@ void SllPolynomial::Sum(const SllPolynomial& sllpol,
 			const double eps) {
   SllPolyNode* aux1 = get_head();
   SllPolyNode* aux2 = sllpol.get_head();
-
-  
 }
 
 
