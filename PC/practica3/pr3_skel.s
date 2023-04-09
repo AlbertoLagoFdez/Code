@@ -86,23 +86,38 @@ main:
             #    }
             #std::cout << "\n";
             #}
-            lw $s2,mat      #mat -> $s2
-            li $t0,0        #f = 0 -> $t0
-            lw $s0,nfil     #nfil -> $s0
+            la $s1,matriz
+            move $t0,$zero
+            li $t2,size
+            la $t3,ncol
+            la $t5,nfil
 
-for1:       bge $t0,$s0,outfor1
-            
-            li $t1,0        #c = 0 -> $t1
-            lw $s1,ncol     #ncol -> $s1
+bucle1:     move $t1,$zero
 
-for2:       bge $t1,$s1,outfor2
+bucle2:     mul $t4,$t0,$t3
+            addu $t4,$t4,$t1
+            mul $t4,$t4,$t2
+            addu $t4,$t4,$s1
+            lw $t4,0($t4)
 
-            mul $t2,$t0,$s1
-            add  $t2,$t2,$t1
-            mul $t2,$t2,4
-            lw $a0,$t2($s2)
+            move $a0,$t4
+            li $v0,1
+            syscall
 
-            #fin del programa
+            la $a0,separador
+            li $v0,4
+            syscall
+
+            addi $t1,$t1,1
+            blt $t1,$t3,bucle2
+
+            la $a0,newline
+            li $v0,4
+            syscall
+
+            addi $t0,$t0,1
+            blt $t0,$t5,bucle1
+
             li $v0,10
             syscall
             

@@ -25,6 +25,7 @@ typedef sll_node_t<pair_double_t> SllPolyNode;  // Nodos de SllPolynomial
 
 // Clase para polinomios basados en listas simples de pares
 class SllPolynomial : public sll_t<pair_double_t> {
+  //parte publica del SllPolynomial
  public:
   // constructores
   SllPolynomial(void) : sll_t() {};
@@ -34,12 +35,18 @@ class SllPolynomial : public sll_t<pair_double_t> {
   ~SllPolynomial() {};
 
   // E/S
+  //metodo para imprimir por pantalla
   void Write(std::ostream& = std::cout) const;
   
   // operaciones
   double Eval(const double) const;
   bool IsEqual(const SllPolynomial&, const double = EPS) const;
   void Sum(const SllPolynomial&, SllPolynomial&, const double = EPS);
+
+  //modificacion inventada
+  void Resta(const SllPolynomial&, SllPolynomial&, const double= EPS);
+  void mulEsca(int num, SllPolynomial&, const double= EPS);
+  SllPolynomial posPar();
 };
 
 
@@ -48,23 +55,22 @@ bool IsNotZero(const double val, const double eps = EPS) {
 }
 
 // FASE II
-// constructor
+// constructor de la clase SllPolynimial
 SllPolynomial::SllPolynomial(const vector_t<double>& v, const double eps) {
-  push_front(new SllPolyNode());
-  SllPolyNode* aux = get_head();
-  for(int i = 0; i < v.get_size(); i++)
+  for(int i = v.get_size() -1; i>=0; i--)
   {
-    if(fabs(v[i]) > eps)
+    if(IsNotZero(v.get_val(i)))
     {
-      aux->set_data(pair_double_t(v[i],i));
-      insert_after(aux, new SllPolyNode());
-      aux = aux -> get_next();
+      pair_double_t SandroDinamita (v.get_val(i), i);
+      sll_node_t<pair_double_t>* n;
+      n = new sll_node_t<pair_double_t> (SandroDinamita);
+      push_front(n);
     }
   }
-  aux->set_next(NULL);
 }
 
 // E/S
+//Metodo para imprimir por pantalla
 void SllPolynomial::Write(std::ostream& os) const {
   os << "[ ";
   bool first{true};
@@ -86,6 +92,7 @@ void SllPolynomial::Write(std::ostream& os) const {
   
 }
 
+//sobrecarga del operador << 
 std::ostream& operator<<(std::ostream& os, const SllPolynomial& p) {
   p.Write(os);
   return os;
@@ -101,10 +108,7 @@ double SllPolynomial::Eval(const double x) const {
   SllPolyNode* aux = get_head();
   while(aux != NULL) 
   {
-    int grado = aux->get_data().get_inx();
-    double coeficiente = aux -> get_data().get_val();
-    double termino = pow(x, grado);
-    result += termino * coeficiente;
+    result = result + (aux ->get_data().get_val() * pow(x, aux->get_data().get_inx()));
     aux = aux->get_next();
   }
   return result;
@@ -114,42 +118,17 @@ double SllPolynomial::Eval(const double x) const {
 bool SllPolynomial::IsEqual(const SllPolynomial& sllpol,
 			    const double eps) const {
   bool differents = false;
-    SllPolyNode* aux1 = get_head();
-    SllPolyNode* aux2 = sllpol.get_head();
-    while(aux1 != NULL && aux2 != NULL)
+  SllPolyNode* Paco = get_head();
+  SllPolyNode* Peña = sllpol.get_head();
+  while( Paco != NULL && Peña != NULL)
+  {
+    if(Paco->get_data().get_val() != Peña->get_data().get_val())
     {
-      if(fabs( aux1 - aux2  > eps))
-      {
-        differents = true;
-        aux1 = aux1->get_next();
-        aux2 = aux2->get_next();
-      }
-      else
-      {
-        aux1 = aux1->get_next();
-        aux2 = aux2->get_next();
-      }
+      differents = true;
     }
-    if(aux1 != NULL)
-    {
-      while(aux1 != NULL)
-      {
-        if(aux1 != 0)
-        {
-          differents = true;
-        }
-      }
-    }
-    else
-    {
-      while(aux2 != NULL)
-      {
-        if(aux2 != 0)
-        {
-          differents = true;
-        }
-      }
-    }
+    Paco = Paco->get_next();
+    Peña = Peña->get_next();
+  }
   return !differents;
 }
 
@@ -157,10 +136,178 @@ bool SllPolynomial::IsEqual(const SllPolynomial& sllpol,
 // Generar nuevo polinomio suma del polinomio invocante mas otro polinomio
 void SllPolynomial::Sum(const SllPolynomial& sllpol,
 			SllPolynomial& sllpolsum,
-			const double eps) {
-  SllPolyNode* aux1 = get_head();
-  SllPolyNode* aux2 = sllpol.get_head();
+			const double eps) 
+{
+  sll_node_t<pair_double_t>* Paco = get_head();
+  sll_node_t<pair_double_t>* Manolo = sllpol.get_head();
+  SllPolynomial sllpolsumcopi;
+  while (Paco != NULL || Manolo != NULL) 
+  {
+    if (Paco == NULL) 
+    {                                              
+      while (Manolo != NULL) 
+      {
+        pair_double_t hijo(Manolo->get_data().get_val(), Manolo->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Manolo = Manolo->get_next();
+      }
+      break;
+    } 
+    else if (Manolo == NULL) 
+    {
+      while (Paco != NULL) 
+      {
+        pair_double_t hijo(Paco->get_data().get_val(), Paco->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Paco = Paco->get_next();
+      }
+      break;
+    } 
+    else 
+    {
+      if (Paco->get_data().get_inx() == Manolo->get_data().get_inx()) 
+      {
+        double val = Paco->get_data().get_val() + Manolo->get_data().get_val();
+        if (val < eps && val > -eps) 
+        {
+          Paco = Paco->get_next();
+          Manolo = Manolo->get_next();
+        }
+        pair_double_t hijo(val, Paco->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Paco = Paco->get_next();
+        Manolo = Manolo->get_next();
+      } 
+      else if (Paco->get_data().get_inx() > Manolo->get_data().get_inx()) 
+      {
+        pair_double_t hijo(Manolo->get_data().get_val(), Manolo->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Manolo = Manolo->get_next();
+      } 
+      else 
+      {
+        pair_double_t hijo(Paco->get_data().get_val(), Paco->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Paco = Paco->get_next();
+      }
+    }
+  }
+  sll_node_t<pair_double_t>* aux = sllpolsumcopi.get_head();
+  while (aux != NULL)
+  {
+    pair_double_t suma(aux->get_data().get_val(), aux->get_data().get_inx());
+    sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(suma);
+    sllpolsum.push_front(n);
+    aux = aux->get_next();
+  }
 }
 
+
+
+//MODIFICACIONES
+void SllPolynomial::Resta(const SllPolynomial& sllpol,
+			SllPolynomial& sllpolsum,
+			const double eps) 
+{
+  sll_node_t<pair_double_t>* Paco = get_head();
+  sll_node_t<pair_double_t>* Manolo = sllpol.get_head();
+  SllPolynomial sllpolsumcopi;
+  while (Paco != NULL || Manolo != NULL) 
+  {
+    if (Paco == NULL) 
+    {                                              
+      while (Manolo != NULL) 
+      {
+        pair_double_t hijo(Manolo->get_data().get_val(), Manolo->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Manolo = Manolo->get_next();
+      }
+      break;
+    } 
+    else if (Manolo == NULL) 
+    {
+      while (Paco != NULL) 
+      {
+        pair_double_t hijo(Paco->get_data().get_val(), Paco->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Paco = Paco->get_next();
+      }
+      break;
+    } 
+    else 
+    {
+      if (Paco->get_data().get_inx() == Manolo->get_data().get_inx()) 
+      {
+        double val = Paco->get_data().get_val() - Manolo->get_data().get_val();
+        if (val < eps && val > -eps) 
+        {
+          Paco = Paco->get_next();
+          Manolo = Manolo->get_next();
+        }
+        pair_double_t hijo(val, Paco->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Paco = Paco->get_next();
+        Manolo = Manolo->get_next();
+      } 
+      else if (Paco->get_data().get_inx() > Manolo->get_data().get_inx()) 
+      {
+        pair_double_t hijo(Manolo->get_data().get_val(), Manolo->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Manolo = Manolo->get_next();
+      } 
+      else 
+      {
+        pair_double_t hijo(Paco->get_data().get_val(), Paco->get_data().get_inx());
+        sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(hijo);
+        sllpolsumcopi.push_front(n);
+        Paco = Paco->get_next();
+      }
+    }
+  }
+  sll_node_t<pair_double_t>* aux = sllpolsumcopi.get_head();
+  while (aux != NULL)
+  {
+    pair_double_t suma(aux->get_data().get_val(), aux->get_data().get_inx());
+    sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(suma);
+    sllpolsum.push_front(n);
+    aux = aux->get_next();
+  }
+}
+
+SllPolynomial SllPolynomial::posPar()
+{
+  SllPolynomial posicionPar, resultado;
+  sll_node_t<pair_double_t>* aux = get_head();
+  while( aux != NULL)
+  {
+    if(aux->get_data().get_inx() % 2 == 0)
+    {
+      pair_double_t pos(aux->get_data().get_val(), aux->get_data().get_inx());
+      sll_node_t<pair_double_t>* n = new sll_node_t<pair_double_t>(pos);
+      posicionPar.push_front(n);
+    }
+  aux = aux->get_next();
+  }
+  sll_node_t<pair_double_t>* aux2 = posicionPar.get_head(); 
+  while (aux2 != NULL)
+  {
+    pair_double_t posi(aux2->get_data().get_val(), aux2->get_data().get_inx());
+    sll_node_t<pair_double_t>* n1 = new sll_node_t<pair_double_t>(posi);
+    resultado.push_front(n1);
+    aux2 = aux2->get_next();
+  }
+  
+
+  return resultado;
+}
 
 #endif  // SLLPOLYNOMIAL_H_

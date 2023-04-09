@@ -63,5 +63,18 @@ int main()
   sllp2.Sum(sllp3, sllpsum23);
   cout << "sllp2 + sllp3= " << sllpsum23;
 
+  cout << endl;
+
+  //modificacion de prueba
+  cout << "modificaciones:" << endl; 
+
+  SllPolynomial sllpsum22;
+  sllp1.Resta(sllp3, sllpsum22);
+  cout << "sllp1 - sllp3= " << sllpsum22;
+
+  cout << endl;
+  cout << "posicion par del sllp1 = " << sllp1.posPar();
+  cout << "posicion par del sllp2 = " << sllp2.posPar();
+  cout << "posicion par del sllp3 = " << sllp3.posPar();
   return 0;
 }

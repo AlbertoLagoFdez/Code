@@ -15,10 +15,10 @@
 #include <cassert>
 
 template<class T> class vector_t {
- //publica
+ //parte publica de la clase vector_t
  public:
   // constructores
-  vector_t(const int = 0);
+  vector_t(const int = 0); // constructor
   vector_t(const vector_t&); // constructor de copia
 
   // operador de asignación
@@ -51,6 +51,7 @@ template<class T> class vector_t {
   //metodo para escribir un vector
   void write(std::ostream& = std::cout) const;
 
+//parte privada de la clase vector_t
  private:
  //privada
   T *v_;
@@ -60,7 +61,7 @@ template<class T> class vector_t {
   void destroy(void);
 };
 
-
+//constructor
 template<class T> vector_t<T>::vector_t(const int n) : v_(NULL), sz_(n) {
   build();
 }
@@ -110,18 +111,18 @@ template<class T> void vector_t<T>::resize(const int n) {
   build();
 }
 
-//getter
+//getter del atributo val_
 template<class T> inline T vector_t<T>::get_val(const int i) const {
   assert(i >= 0 && i < get_size());
   return v_[i];
 }
 
-//getter
+//getter del atributo sz_
 template<class T> inline int vector_t<T>::get_size() const {
   return sz_;
 }
 
-//setter
+//setter del atributo val
 template<class T> void vector_t<T>::set_val(const int i, const T d) {
   assert(i >= 0 && i < get_size());
   v_[i] = d;

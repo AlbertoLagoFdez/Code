@@ -17,6 +17,7 @@
 
 // Clase para almacenar una lista simplemente enlazada
 template <class T> class sll_t {
+  //parte publica de clase sll_t
  public:
   // constructor
   sll_t(void) : head_(NULL) {}
@@ -41,6 +42,7 @@ template <class T> class sll_t {
   // E/S
   std::ostream& write(std::ostream& = std::cout) const;
 
+  //parte privada de la clase sll_t
  private:
   sll_node_t<T>* head_;
 };
@@ -55,12 +57,13 @@ template <class T> sll_t<T>::~sll_t(void) {
   }
 }
 
-// Comprobar si lista vacía
+//Metodo que comprueba si lista vacía
 template <class T> bool sll_t<T>::empty(void) const {
   return head_ == NULL;
 }
 
 // operaciones
+//metodo que inserta por el head_
 template <class T> void sll_t<T>::push_front(sll_node_t<T>* n) {
   assert(n != NULL);
 
@@ -68,6 +71,7 @@ template <class T> void sll_t<T>::push_front(sll_node_t<T>* n) {
   head_ = n;
 }
 
+//metodo que extrae por el head_
 template <class T> sll_node_t<T>* sll_t<T>::pop_front(void) { 
   assert(!empty());
   sll_node_t<T>* aux = head_;
@@ -77,6 +81,7 @@ template <class T> sll_node_t<T>* sll_t<T>::pop_front(void) {
   return aux;
 }
 
+//Metodo que inserta por el final
 template <class T> void sll_t<T>::insert_after(sll_node_t<T>* prev,
 					       sll_node_t<T>* n) {
   assert(prev != NULL && n != NULL);
@@ -85,6 +90,7 @@ template <class T> void sll_t<T>::insert_after(sll_node_t<T>* prev,
   prev->set_next(n);
 }
 
+//Metodo que extrae por el final
 template <class T> sll_node_t<T>* sll_t<T>::erase_after(sll_node_t<T>* prev) { 
   assert(!empty());
   assert(prev != NULL);
@@ -97,6 +103,7 @@ template <class T> sll_node_t<T>* sll_t<T>::erase_after(sll_node_t<T>* prev) {
   return aux;
 }
 
+//Metodo que busca un elemento del nodo
 template <class T> sll_node_t<T>* sll_t<T>::search(const T& d) const {
   sll_node_t<T>* aux = head_;
   while ((aux != NULL) && (aux->get_data() != d))
@@ -106,6 +113,7 @@ template <class T> sll_node_t<T>* sll_t<T>::search(const T& d) const {
 }
 
 // E/S
+//Metodo para imprimir por pantalla
 template <class T> std::ostream& sll_t<T>::write(std::ostream& os) const {
   sll_node_t<T>* aux = head_;
 
