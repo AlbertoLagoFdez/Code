@@ -33,6 +33,15 @@ main:
             la $a0,title
             li $v0,4
             syscall
+
+            #cargar los vectores con los numeros dichos
+            #for(int i = 0; i < maxdim; i++)
+            #{
+            #v[i]=10 + i;
+            #}
+
+            
+
             #fin del programa
             la $a0,msg_fin
             li $v0,4
@@ -40,4 +49,3 @@ main:
             
             li $v0,10
             syscall
-
