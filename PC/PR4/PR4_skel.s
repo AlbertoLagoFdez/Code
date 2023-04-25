@@ -40,7 +40,25 @@ main:
             #v[i]=10 + i;
             #}
 
+            li $t0,size                 #tamaño bytes
+            li $t1,maxdim               #maximo dimension de cada vector
+            move $t2,$zero                    #posicion del vector
+            la $s0,v1                   #cargar el vector 1 en $s0
+            li.s $f4,10.0
+
+buclev1:    mul $t3,$t2,$t0
+            addu $t3,$s0,$t3
+            swc1 $f4,0($t3)
+            addi.s $f4,$f4,1.0
+            addi $t2,$t2,1
             
+
+
+
+
+            bne $t2,maxdim,buclev1
+
+
 
             #fin del programa
             la $a0,msg_fin
