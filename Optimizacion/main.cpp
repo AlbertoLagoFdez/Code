@@ -10,7 +10,7 @@
 #include "grafo.h"
 
 void menu (unsigned dirigido, char &opcion) { //Expresion del menu de opciones segun sea un grafo dirigido o no dirigido
-  cout << "Optimizacion en Grafos, 2020-2021 Adrián Manuel Acuña Perdomo" << endl;
+  cout << "Optimizacion en Grafos, 2020-2021 ALBERTO LAGO FERNANDEZ" << endl;
   cout << "c. [c]argar grafo desde fichero" << endl;
   cout << "i. Mostrar [i]nformacion basica del grafo" << endl;
   if (dirigido == 0) {//Grafo no dirigido
@@ -50,7 +50,6 @@ int main(int argc, char *argv[])
       menu(G.Es_dirigido(), opcion);
       cout << endl;
       switch (opcion) {
-        case 'q': break;
         case 'c':
           cout << "Introduce el nombre completo del fichero de datos" << endl;
           cin >> nombrefichero;
@@ -61,10 +60,12 @@ int main(int argc, char *argv[])
             cout << "Fichero cargado correctamente desde " << nombrefichero << endl;
           };
           break;
+
         case 'i':
           cout << "Grafo cargado desde " << nombrefichero << endl;
           G.Info_Grafo();
           break;
+
         case 'm': // Recorrido en amplitud, hacerlo
           G.RecorridoAmplitud();
           break;
@@ -75,9 +76,11 @@ int main(int argc, char *argv[])
             cout << " es:" << endl << endl;
             G.Mostrar_Listas(0);
             break;
+
           case 'p': // Mostrar arbol generador minimo coste, Prim
             G.Prim();
             break;
+            
         } else {// Si es un grafo dirigido
           case 's': // Mostrar lista de sucesores del grafo, hacerlo
             cout << "La lista de sucesores del grafo " << nombrefichero;
@@ -90,9 +93,6 @@ int main(int argc, char *argv[])
             G.Mostrar_Listas(-1);
             break;
         }
-        default:
-          cout << endl << "Opcion no valida, intentalo de nuevo" << endl << endl;
-          break;
       }
     }while (opcion != 'q');
   }

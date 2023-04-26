@@ -14,7 +14,7 @@ void GRAFO :: destroy()
 	for (unsigned i=0; i< n; i++)
     {
 		LS[i].clear();
-		A[i].clear();
+		//A[i].clear();
 		if (dirigido == 1)
         {
             LP[i].clear();
@@ -43,6 +43,10 @@ void GRAFO :: build (char nombrefichero[85], int &errorapertura)
         // leemos los m arcos
     for (k=0;k<m;k++) {
       textfile >> (unsigned &) i  >> (unsigned &) j >> (int &) dummy.c;
+            //i: de donde viene
+            //j: a donde va
+            //dummy.c = coste
+            //dummy tiene que tener su j que es a donde va y su coste que es cuanto sale
       //damos los valores a dummy.j y dummy.c
       //situamos en la posicion del nodo i a dummy mediante push_backM
       //pendiente de hacer un segundo push_back si es no dirigido. O no.
@@ -97,8 +101,8 @@ unsigned GRAFO::Es_dirigido()
 
 void GRAFO::Info_Grafo()
 {
-    Es_dirigido()? cout<< "Grafo no dirigido con " << n << " nodos y con " << m <<" aristas" << endl:
-    cout << "Grafo dirigido con " << n << " nodos y con " << m << " aristas" << endl;
+    Es_dirigido()? cout<< "\nGrafo no dirigido con " << n << " nodos y con " << m <<" aristas" << endl:
+    cout << "\nGrafo dirigido con " << n << " nodos y con " << m << " aristas\n" << endl;
 }
 
 void Mostrar_Lista(vector<LA_nodo> L)
@@ -239,86 +243,68 @@ void GRAFO::RecorridoAmplitud() {
 }
 
 void GRAFO::Prim(){
-  std::vector<LA_nodo> P; //Usaremos la misma estructura de datos de LS para guardar P y D
-  std::vector<bool> visitados; //Vector de booleanos para saber si un nodo ha sido visitado o no
-  visitados.resize(n, false);
-  std::vector<int> costes; //Vector de costes para saber el coste mínimo de cada nodo
-  std::vector<int> predecesores; //Vector de predecesores para saber el nodo que lo precede
-  costes.resize(n);
-  predecesores.resize(n);
-  int nodoActual{0}; //Nodo actual
-  int nodoMenorCoste{0}; //Nodo con menor coste
-  int costeMenor{0}; //Coste menor
-  int costeTotal{0}; //Coste total del árbol
-
-  //Inicializamos P y D en P
-  //Creamos P
-  P.resize(n); //Ya tenemos las posiciones P[0] a P[n-1]
-  for (unsigned i{0}; i < n; ++i) P[i].resize(n); //Ya tenemos la matriz cuadrada
-  for (unsigned i{0}; i < n; ++i) {
-  for (unsigned j{0}; j < n; ++j) {
-    if (i != j) {// Inicialización base
-      P[i][j].j = -1; //en el campo .j ponemos el predecesor
-      P[i][j].c = maxint; //en el campo .c ponemos el coste
-    } else {// Inicializamos los bucles
-      P[i][j].c = 0; //El coste en el caso de un bucle
-      P[i][j].j = i; //El predecesor en el caso de un bucle
-    }
-  }
-  }
-  //Recorremos LS para inicializar P, su predecesor en .j y su distancia en .c
-  for (unsigned i{0}; i < n; ++i) {
-    for (unsigned j{0}; j < LS[i].size(); ++j) {
-        P[i][LS[i][j].j].j = i;
-        P[i][LS[i][j].j].c = LS[i][j].c;
-    }
-  }
-
-  for (unsigned i{0}; i < n; ++i) {
-    visitados[i] = false;
-    costes[i] = maxint;
-    predecesores[i] = -1;
-  }
-
-  //Inicializamos el nodo actual y el coste menor
-  nodoActual = 0;
-  costeMenor = 0;
-
-  //Bucle principal
-  while (nodoActual != -1) {
-    //Marcamos el nodo actual como visitado
-    visitados[nodoActual] = true;
-    //Recorremos la fila del nodo actual
-    for (unsigned i{0}; i < n; ++i) {
-      //Si el nodo no ha sido visitado y el coste es menor que el coste actual
-      if ((visitados[i] == false) && (P[nodoActual][i].c < costes[i])) {
-        //Actualizamos el coste y el predecesor
-        costes[i] = P[nodoActual][i].c;
-        predecesores[i] = nodoActual;
+//T = ∅
+  int T = 0;
+  int u = 0;
+  int sumaminimo{0};
+  vector<int> coste(n, maxint);
+  vector<bool> M(n, false);
+  vector<int> pred(n, 0);
+          //Para todo nodo i de V hacer coste[i] = ∞ 
+  coste[0] = 0;
+  
+  
+            //Mientras en T no haya n-1 aristas hacer
+  while (T < n) 
+  {
+            //sea u el último nodo que entró en M //u va a mejorar costes
+            //para todo j adyacente a u en V-M hacer
+    for (int j = 0;j < LS[u].size(); ++j) 
+    {
+            //si coste[j] > w(u, j) entonces
+      if(M[LS[u][j].j] == false && coste[LS[u][j].j] > LS[u][j].c)
+      {
+            //coste[j] = w(u,j) //Esta arista es menos costosa
+            //pred[j] = u //cambio el nodo de conexión
+        coste[LS[u][j].j] = LS[u][j].c;
+        pred[LS[u][j].j] = u;
       }
     }
-    //Buscamos el nodo con menor coste
-    nodoMenorCoste = -1;
-    costeMenor = maxint;
-    for (unsigned i{0}; i < n; ++i) {
-      if ((visitados[i] == false) && (costes[i] < costeMenor)) {
-        nodoMenorCoste = i;
-        costeMenor = costes[i];
+            //sea u = nodo con menor coste en V-M
+            //M = M U {u} 
+            //T = T U {(u, pred[u])}
+    int min{maxint};
+    for (int z = 0; z < coste.size(); ++z)
+    {
+      if(M[z] == false && coste[z] < min)
+      {
+        min = coste[z];
+        u = z;
       }
     }
-    //Actualizamos el nodo actual
-    nodoActual = nodoMenorCoste;
+    M[u] = true;
+    T++;
   }
-
-  //Mostramos el árbol por pantalla
-  std::cout << "Árbol generado por el algoritmo de Prim:\n\n";
-  for (unsigned i{0}; i < n; ++i) {
-    if (predecesores[i] != -1) {
-      std::cout << "Nodo " << predecesores[i] + 1 << " -> Nodo " << i + 1 << " | Coste: " << costes[i] << std::endl;
-      costeTotal += costes[i];
+  for (int i = 0; i < coste.size(); i++){
+    if(coste[i] != maxint){
+      sumaminimo = sumaminimo + coste[i];
     }
   }
-  std::cout << "\nCoste total del árbol: " << costeTotal << std::endl;
+
+  std::cout << "\n";
+  cout << " ";
+
+  for(int i = 0; i < n; i++ )
+  {
+    if(pred[i] != -1 && pred[i] != i)
+    { 
+      std::cout << "(" << pred[i]+1 << ", " << i+1 << ") ";
+      std::cout << "[" << coste[i] << "]\n ";
+    }
+  }
+
+  std::cout << "El coste del árbol de expansión mínimo es: " << sumaminimo << std::endl;
+  cout << "\n";
 }
 
 
