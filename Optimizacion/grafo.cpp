@@ -110,7 +110,7 @@ unsigned GRAFO::Es_dirigido()
 
 void GRAFO::Info_Grafo()
 {
-    Es_dirigido()? cout<< "\nGrafo no dirigido con " << n << " nodos y con " << m <<" aristas" << endl:
+    Es_dirigido()? cout<< "\nGrafo no dirigido con " << n << " nodos y con " << m <<" aristas\n" << endl:
     cout << "\nGrafo dirigido con " << n << " nodos y con " << m << " aristas\n" << endl;
 }
 
@@ -343,8 +343,9 @@ comparación realizada para buscar atajos, incrementamos el contador de
 comparaciones.
 - Esto lo hacemos mientras haya candidatos
 */
+    comparaciones++;
   }
-  while (/*condición de parada*/);
+  while ();
   cout << "Soluciones:" << endl;
 //En esta parte del código, mostramos los caminos mínimos para cada nodo si
 //los hay.
@@ -374,4 +375,19 @@ void GRAFO::BellmanFordEnd_(double &comparaciones, unsigned s)
 //tenemos solucion
 //Mostramos los caminos mínimos que se puedan haber encontrado, o
 //advertimos de la existencia de un ciclo de coste negativo.
+}
+
+
+
+void GRAFO::ComparativaCM()
+{
+  unsigned s;
+  double comparacionesDij, comparacionesBell;
+  cout << "Nodo de partida? [1-6]: ";
+  cin >> s;
+  cout << "Resultados del algoritmo de Dijkstra.";
+  Dijkstra_(comparacionesDij, s);
+
+  cout << "Resultados del algoritmo de Bellman Ford End.";
+  BellmanFordEnd_(comparacionesBell, s);
 }

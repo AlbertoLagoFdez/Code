@@ -21,6 +21,7 @@ void menu (unsigned dirigido, char &opcion) { //Expresion del menu de opciones s
     cout << "s. Mostrar la lista de [s]ucesores del grafo" << endl;
     cout << "e. Mostrar la lista de pr[e]decesores del grafo" << endl;
     cout << "m. Realizar un recorrido en a[m]plitud del grafo desde un nodo por sucesores" << endl;
+    cout << "v. Caminos minimos: Comparamos Dijkstra [v]s BellmanFordEnd" << endl;
   };
   cout << "q. Finalizar el programa" << endl;
   cout << "Introduce la letra de la accion a ejecutar  > ";
@@ -92,6 +93,9 @@ int main(int argc, char *argv[])
             cout << " es:" << endl << endl;
             G.Mostrar_Listas(-1);
             break;
+
+          case 'v':
+            
         }
       }
     }while (opcion != 'q');

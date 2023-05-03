@@ -55,12 +55,13 @@ public:
      void RecorridoAmplitud(); //Construye un recorrido en amplitud desde un nodo inicial
 	 void ListaPredecesores();
 	 void Prim();
+	 ~GRAFO(); //Destructor del objeto grafo
 
 	 //practica 5
 	 void Dijkstra_(double &comparaciones, unsigned s);
 	 void BellmanFordEnd_(double &comparaciones, unsigned s);
 	 void MostrarCamino(unsigned s, unsigned i, vector<unsigned> pred);
-     ~GRAFO(); //Destructor del objeto grafo
+     void ComparativaCM();
 };
 
 #endif
