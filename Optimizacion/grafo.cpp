@@ -80,6 +80,15 @@ GRAFO::~GRAFO()
 	destroy();
 }
 
+void GRAFO::MostrarCamino(unsigned s, unsigned i, vector<unsigned> pred)
+{
+  if (i != s)
+  {
+    MostrarCamino(s,pred[i],pred);
+    cout << pred[i]+1 << " - ";
+  }
+}
+
 GRAFO::GRAFO(char nombrefichero[85], int &errorapertura)
 {
 	build (nombrefichero, errorapertura);
@@ -307,6 +316,62 @@ void GRAFO::Prim(){
   cout << "\n";
 }
 
+void GRAFO::Dijkstra_(double &comparaciones, unsigned s)
+{  
+  vector<bool> PermanentementeEtiquetado;
+  vector<int> d;
+  vector<unsigned> pred;
+  int min;
+  unsigned candidato;
+//Inicialmente no hay ningun nodo permanentemente etiquetado
+  PermanentementeEtiquetado.resize(n,false);
+//Inicialmente todas las etiquetas distancias son infinito
+  d.resize(n,maxint);
+//Inicialmente el pred es null
+  pred.resize(n,UERROR);
+//La etiqueta distancia del nodo origen es 0, y es su propio pred
+  d[s]=0; pred[s]=s; comparaciones = 0;
+  do
+  {
+  /*
+- Buscamos un nodo candidato a ser permanentemente etiquetado: aquel
+de entre los no permanentemente etiquetados, es decir, en el almacén con
+menor etiqueta distancia no infinita.
+- Si existe ese candidato, lo etiquetamos permanentemente y usamos
+los arcos de la lista de sucesores para buscar atajos. Por cada
+comparación realizada para buscar atajos, incrementamos el contador de
+comparaciones.
+- Esto lo hacemos mientras haya candidatos
+*/
+  }
+  while (/*condición de parada*/);
+  cout << "Soluciones:" << endl;
+//En esta parte del código, mostramos los caminos mínimos para cada nodo si
+//los hay.
+}
 
-
-
+void GRAFO::BellmanFordEnd_(double &comparaciones, unsigned s)
+{
+  vector<int> d;
+  vector<unsigned> pred;
+  unsigned numeromejoras = 0;
+  bool mejora;
+//Idem que en el algoritmo de Dijkstra
+  d.resize(n,maxint);
+  pred.resize(n,UERROR);
+  d[s]=0; pred[s]=s; comparaciones = 0;
+  do  
+  {
+// recorremos todos los arcos, y para cada (i, j), buscamos si d[j] > d[i]
+//+ cij, y actualizamos d y pred, incrementando el contador comparaciones
+//cuando comparamos, independientemente de si mejoramos o no.
+//si al menos en una ocasion ha mejorado una etiqueta distancia, no hemos
+//terminado; contabilizamos los bucles en los que ha habido mejoras
+  }
+  while ((numeromejoras < n) && (mejora == true));
+//para salir del bucle, si mejora es true, pues hay un ciclo, pues hemos
+//realizado n+1 veces la relajacion con mejora; si mejora es false, pues
+//tenemos solucion
+//Mostramos los caminos mínimos que se puedan haber encontrado, o
+//advertimos de la existencia de un ciclo de coste negativo.
+}
