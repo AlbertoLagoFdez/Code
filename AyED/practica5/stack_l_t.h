@@ -36,6 +36,8 @@ template<class T> class stack_l_t {
 
 private:
   dll_t<T> l_;
+  //modificacion
+  void count_pair();
 };
 
 
@@ -49,6 +51,7 @@ template<class T> void stack_l_t<T>::push(const T& dato) {
 template<class T> void stack_l_t<T>::pop(void) {
   assert(!empty());
   delete l_.pop_front();
+  count_pair();
 }
 
 template<class T> const T& stack_l_t<T>::top(void) const {
@@ -71,5 +74,22 @@ template<class T> std::ostream& stack_l_t<T>::write(std::ostream& os) const {
   return os;
 }
 
+//modificacion
+
+template <class T>
+void stack_l_t<T>::count_pair()
+{
+  dll_node_t<T>* aux = l_.get_head();
+  int count{0};
+  while(aux != NULL)
+  {
+    if (aux->get_data() % 2 == 0)
+    {
+      count++;
+    }
+    aux = aux->get_next();
+  }
+  std::cout << "   Hay " << count << " pares en la pila." << std::endl;  
+}
 
 #endif  // STACKL_H_
