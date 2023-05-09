@@ -82,7 +82,9 @@ int main(int argc, char *argv[])
             G.Prim();
             break;
             
-        } else {// Si es un grafo dirigido
+        } 
+        else 
+        {// Si es un grafo dirigido
           case 's': // Mostrar lista de sucesores del grafo, hacerlo
             cout << "La lista de sucesores del grafo " << nombrefichero;
             cout << " es:" << endl << endl;
@@ -95,7 +97,7 @@ int main(int argc, char *argv[])
             break;
 
           case 'v':
-            
+            G.ComparativaCM();
         }
       }
     }while (opcion != 'q');

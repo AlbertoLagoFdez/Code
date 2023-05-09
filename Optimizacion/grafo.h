@@ -58,10 +58,11 @@ public:
 	 ~GRAFO(); //Destructor del objeto grafo
 
 	 //practica 5
-	 void Dijkstra_(double &comparaciones, unsigned s);
-	 void BellmanFordEnd_(double &comparaciones, unsigned s);
-	 void MostrarCamino(unsigned s, unsigned i, vector<unsigned> pred);
-     void ComparativaCM();
+	void Dijkstra_(double &comparaciones, unsigned s); //Ejecuta el algoritmo de Dijsktra y muestra el árbol por pantalla
+  	void BellmanFordEnd_(double &comparaciones, unsigned s); //Ejecuta el algoritmo de BellmanFord y muestra el árbol por pantalla
+
+	void ComparativaCM(); //Ejecuta los algoritmos de Dijsktra y BellmanFord y muestra el árbol por pantalla
+	void MostrarCamino(unsigned s, unsigned i, vector<unsigned> pred);
 };
 
 #endif
