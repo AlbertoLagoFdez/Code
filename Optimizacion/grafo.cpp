@@ -129,8 +129,8 @@ unsigned GRAFO::Es_dirigido()
 
 void GRAFO::Info_Grafo()
 {
-    Es_dirigido()? cout<< "\nGrafo no dirigido con " << n << " nodos y con " << m <<" aristas\n" << endl:
-    cout << "\nGrafo dirigido con " << n << " nodos y con " << m << " aristas\n" << endl;
+    Es_dirigido()? cout<< "\nGrafo dirigido con " << n << " nodos y con " << m <<" aristas\n" << endl:
+    cout << "\nGrafo no dirigido con " << n << " nodos y con " << m << " aristas\n" << endl;
 }
 
 void Mostrar_Lista(vector<LA_nodo> L)
@@ -339,6 +339,7 @@ void GRAFO::Prim(){
 void GRAFO::Dijkstra_(double &comparaciones, unsigned s)
 {
   cout << "Soluciones:" << endl;
+  cout << LS[2][1].j << endl;
   vector<bool> PermanentementeEtiquetado;
   vector<int> d;
   vector<unsigned> pred;
@@ -384,19 +385,19 @@ void GRAFO::Dijkstra_(double &comparaciones, unsigned s)
   } while (candidato != UERROR);
   //En esta parte del código, mostramos los caminos mínimos para cada nodo si los hay.
   for (unsigned i=0; i<n; i++) {
-    if(i < s)
-    {
-      cout << "No hay camino desde " << s+1 << " hasta " << i+1 << endl;
-    }
-    if (i > s)
-    {
       if (d[i] != maxint) 
       {
+        if(i != s)
+        {
         cout << "El camino desde " << s+1 << " hasta " << i+1 << " es: ";
         MostrarCamino(s, i, pred);
         cout << i+1 << " y su longitud es " << d[i] << endl;
+        }
       }
-    }
+      else
+      {
+        cout << "No hay camino desde " << s+1 << " hasta " << i+1 << endl;
+      }
   }
 }
 
@@ -436,19 +437,19 @@ void GRAFO::BellmanFordEnd_(double &comparaciones, unsigned s) {
     cout << "Soluciones:" << endl;
     for (unsigned i=0; i<n; i++) 
     {
-      if(i < s)
-      {
-        cout << "No hay camino desde " << s+1 << " hasta " << i+1 << endl;
-      }
-      if (i > s)
-      {
         if (d[i] != maxint) 
         {
+          if(i != s)
+          {
           cout << "El camino desde " << s+1 << " hasta " << i+1 << " es: ";
           MostrarCamino(s, i, pred);
           cout << i+1 << " y su longitud es " << d[i] << endl;
+          }
         }
-      }
+        else
+        {
+          cout << "No hay camino desde " << s+1 << " hasta " << i+1 << endl;
+        }
     }
   }
 }
